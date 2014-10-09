@@ -24,9 +24,6 @@
 #include "JuceHeader.h"
 
 #include <ctime>
-
-#include "../../shared/auxilliary/logger.h"
-#include "../../shared/auxilliary/juce_file_io.h"
 //[/Headers]
 
 
