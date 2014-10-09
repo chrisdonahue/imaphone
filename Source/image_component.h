@@ -17,8 +17,8 @@
   ==============================================================================
 */
 
-#ifndef __JUCE_HEADER_EAD602C4CAC42026__
-#define __JUCE_HEADER_EAD602C4CAC42026__
+#ifndef __JUCE_HEADER_75FEAFCD384A25FE__
+#define __JUCE_HEADER_75FEAFCD384A25FE__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "JuceHeader.h"
@@ -34,14 +34,12 @@
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class imaphone_component  : public Component,
-                            public ButtonListener,
-                            public ComboBoxListener
+class image_component  : public Component
 {
 public:
     //==============================================================================
-    imaphone_component ();
-    ~imaphone_component();
+    image_component ();
+    ~image_component();
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
@@ -49,12 +47,7 @@ public:
 
     void paint (Graphics& g);
     void resized();
-    void buttonClicked (Button* buttonThatWasClicked);
-    void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
 
-    // Binary resources:
-    static const char* fa_arrow_right_svg;
-    static const int fa_arrow_right_svgSize;
 
 
 private:
@@ -62,21 +55,13 @@ private:
     //[/UserVariables]
 
     //==============================================================================
-    ScopedPointer<Label> label;
-    ScopedPointer<GroupComponent> groupComponent;
-    ScopedPointer<GroupComponent> groupComponent2;
-    ScopedPointer<ImageButton> imageButton;
-    ScopedPointer<image_component> component;
-    ScopedPointer<waveform_component> component2;
-    ScopedPointer<ComboBox> comboBox;
-    ScopedPointer<Label> label2;
 
 
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (imaphone_component)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (image_component)
 };
 
 //[EndFile] You can add extra defines here...
 //[/EndFile]
 
-#endif   // __JUCE_HEADER_EAD602C4CAC42026__
+#endif   // __JUCE_HEADER_75FEAFCD384A25FE__

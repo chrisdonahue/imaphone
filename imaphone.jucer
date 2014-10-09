@@ -5,6 +5,14 @@
               jucerVersion="3.1.0">
   <MAINGROUP id="qGxPnb" name="imaphone">
     <GROUP id="{CC313D07-DA6A-59AA-3734-DC5783942DF2}" name="Source">
+      <FILE id="LsMq2S" name="image_component.cpp" compile="1" resource="0"
+            file="Source/image_component.cpp"/>
+      <FILE id="EvBLCD" name="image_component.h" compile="0" resource="0"
+            file="Source/image_component.h"/>
+      <FILE id="JWbBV1" name="waveform_component.cpp" compile="1" resource="0"
+            file="Source/waveform_component.cpp"/>
+      <FILE id="sgqS1O" name="waveform_component.h" compile="0" resource="0"
+            file="Source/waveform_component.h"/>
       <FILE id="agWOQc" name="imaphone_component.cpp" compile="1" resource="0"
             file="Source/imaphone_component.cpp"/>
       <FILE id="SndOcJ" name="imaphone_component.h" compile="0" resource="0"

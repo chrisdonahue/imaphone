@@ -295,6 +295,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\image_component.cpp">
+      <Filter>imaphone\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\waveform_component.cpp">
+      <Filter>imaphone\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\imaphone_component.cpp">
       <Filter>imaphone\Source</Filter>
     </ClCompile>
@@ -1497,6 +1503,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\image_component.h">
+      <Filter>imaphone\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\waveform_component.h">
+      <Filter>imaphone\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\imaphone_component.h">
       <Filter>imaphone\Source</Filter>
     </ClInclude>

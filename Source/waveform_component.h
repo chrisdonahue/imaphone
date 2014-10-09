@@ -17,11 +17,16 @@
   ==============================================================================
 */
 
-#ifndef __JUCE_HEADER_EAD602C4CAC42026__
-#define __JUCE_HEADER_EAD602C4CAC42026__
+#ifndef __JUCE_HEADER_F1FF5EEF8E95917A__
+#define __JUCE_HEADER_F1FF5EEF8E95917A__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "JuceHeader.h"
+
+#include <ctime>
+
+#include "../../shared/auxilliary/logger.h"
+#include "../../shared/auxilliary/juce_file_io.h"
 //[/Headers]
 
 
@@ -34,49 +39,53 @@
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class imaphone_component  : public Component,
-                            public ButtonListener,
-                            public ComboBoxListener
+class waveform_component  : public Component,
+                            public FileDragAndDropTarget
 {
 public:
     //==============================================================================
-    imaphone_component ();
-    ~imaphone_component();
+    waveform_component ();
+    ~waveform_component();
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
+	bool isInterestedInFileDrag (const StringArray& files);
     //[/UserMethods]
 
     void paint (Graphics& g);
     void resized();
-    void buttonClicked (Button* buttonThatWasClicked);
-    void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
+    void filesDropped (const StringArray& filenames, int mouseX, int mouseY);
+    void mouseMove (const MouseEvent& e);
+    void mouseEnter (const MouseEvent& e);
+    void mouseExit (const MouseEvent& e);
+    void mouseDown (const MouseEvent& e);
+    void mouseDrag (const MouseEvent& e);
+    void mouseUp (const MouseEvent& e);
+    void mouseDoubleClick (const MouseEvent& e);
+    void mouseWheelMove (const MouseEvent& e, const MouseWheelDetails& wheel);
+    bool keyPressed (const KeyPress& key);
+    bool keyStateChanged (const bool isKeyDown);
+    void modifierKeysChanged (const ModifierKeys& modifiers);
 
-    // Binary resources:
-    static const char* fa_arrow_right_svg;
-    static const int fa_arrow_right_svgSize;
 
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
+	aux::logger* logger;
+	aux::logger_params* logger_params;
+
+	CriticalSection audio_data_lock;
+	float* audio_data;
     //[/UserVariables]
 
     //==============================================================================
-    ScopedPointer<Label> label;
-    ScopedPointer<GroupComponent> groupComponent;
-    ScopedPointer<GroupComponent> groupComponent2;
-    ScopedPointer<ImageButton> imageButton;
-    ScopedPointer<image_component> component;
-    ScopedPointer<waveform_component> component2;
-    ScopedPointer<ComboBox> comboBox;
-    ScopedPointer<Label> label2;
 
 
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (imaphone_component)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (waveform_component)
 };
 
 //[EndFile] You can add extra defines here...
 //[/EndFile]
 
-#endif   // __JUCE_HEADER_EAD602C4CAC42026__
+#endif   // __JUCE_HEADER_F1FF5EEF8E95917A__

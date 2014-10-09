@@ -131,6 +131,8 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\image_component.cpp"/>
+    <ClCompile Include="..\..\Source\waveform_component.cpp"/>
     <ClCompile Include="..\..\Source\imaphone_component.cpp"/>
     <ClCompile Include="..\..\Source\Main.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.cpp">
@@ -1228,6 +1230,8 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_video\juce_video.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\image_component.h"/>
+    <ClInclude Include="..\..\Source\waveform_component.h"/>
     <ClInclude Include="..\..\Source\imaphone_component.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioSampleBuffer.h"/>

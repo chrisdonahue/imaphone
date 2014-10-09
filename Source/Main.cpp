@@ -9,7 +9,7 @@
 */
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "MainComponent.h"
+#include "imaphone_component.h"
 
 
 //==============================================================================
@@ -65,7 +65,7 @@ public:
                                         Colours::lightgrey,
                                         DocumentWindow::allButtons)
         {
-            setContentOwned (new MainContentComponent(), true);
+            setContentOwned (new imaphone_component(), true);
 
             centreWithSize (getWidth(), getHeight());
             setVisible (true);
