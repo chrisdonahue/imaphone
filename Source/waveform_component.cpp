@@ -105,7 +105,7 @@ void waveform_component::paint (Graphics& g)
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (Colours::white);
+    g.fillAll (Colour (0xff222222));
 
     //[UserPaint] Add your own custom painting code here..
 	if (audio_data == nullptr) {
@@ -256,7 +256,7 @@ BEGIN_JUCER_METADATA
     <METHOD name="mouseEnter (const MouseEvent&amp; e)"/>
     <METHOD name="mouseMove (const MouseEvent&amp; e)"/>
   </METHODS>
-  <BACKGROUND backgroundColour="ffffffff"/>
+  <BACKGROUND backgroundColour="ff222222"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

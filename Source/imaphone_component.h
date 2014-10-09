@@ -38,8 +38,8 @@
                                                                     //[/Comments]
 */
 class imaphone_component  : public Component,
-                            public ButtonListener,
-                            public ComboBoxListener
+                            public ComboBoxListener,
+                            public ButtonListener
 {
 public:
     //==============================================================================
@@ -52,8 +52,8 @@ public:
 
     void paint (Graphics& g);
     void resized();
-    void buttonClicked (Button* buttonThatWasClicked);
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
+    void buttonClicked (Button* buttonThatWasClicked);
 
     // Binary resources:
     static const char* fa_arrow_right_svg;
@@ -68,11 +68,16 @@ private:
     ScopedPointer<Label> label;
     ScopedPointer<GroupComponent> groupComponent;
     ScopedPointer<GroupComponent> groupComponent2;
-    ScopedPointer<ImageButton> imageButton;
     ScopedPointer<image_component> component;
     ScopedPointer<waveform_component> component2;
     ScopedPointer<ComboBox> comboBox;
     ScopedPointer<Label> label2;
+    ScopedPointer<ToggleButton> toggleButton;
+    ScopedPointer<ToggleButton> toggleButton2;
+    ScopedPointer<ToggleButton> toggleButton3;
+    ScopedPointer<ToggleButton> toggleButton4;
+    ScopedPointer<TextButton> textButton;
+    ScopedPointer<TextButton> textButton2;
 
 
     //==============================================================================

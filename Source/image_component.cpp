@@ -57,9 +57,12 @@ void image_component::paint (Graphics& g)
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (Colours::white);
+    g.fillAll (Colour (0xff222222));
 
     //[UserPaint] Add your own custom painting code here..
+	const ScopedLock sl (image_lock);
+
+	g.drawImageWithin(image, 0, 0, this->getWidth(), this->getHeight(), RectanglePlacement::centred);
     //[/UserPaint]
 }
 
@@ -72,6 +75,10 @@ void image_component::resized()
 void image_component::filesDropped (const StringArray& filenames, int mouseX, int mouseY)
 {
     //[UserCode_filesDropped] -- Add your code here...
+	const ScopedLock sl (image_lock);
+	const File& dropped_file(filenames[0]);
+	image = ImageFileFormat::loadFrom(dropped_file);
+	this->repaint();
     //[/UserCode_filesDropped]
 }
 
@@ -132,6 +139,10 @@ void image_component::modifierKeysChanged (const ModifierKeys& modifiers)
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
+bool image_component::isInterestedInFileDrag (const StringArray& files)
+{
+	return files.size() == 1;
+}
 //[/MiscUserCode]
 
 
@@ -161,7 +172,7 @@ BEGIN_JUCER_METADATA
     <METHOD name="mouseWheelMove (const MouseEvent&amp; e, const MouseWheelDetails&amp; wheel)"/>
     <METHOD name="modifierKeysChanged (const ModifierKeys&amp; modifiers)"/>
   </METHODS>
-  <BACKGROUND backgroundColour="ffffffff"/>
+  <BACKGROUND backgroundColour="ff222222"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

@@ -44,6 +44,7 @@ public:
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
+	bool isInterestedInFileDrag (const StringArray& files);
     //[/UserMethods]
 
     void paint (Graphics& g);
@@ -63,6 +64,9 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
+	CriticalSection image_lock;
+	Image image;
+
     //[/UserVariables]
 
     //==============================================================================

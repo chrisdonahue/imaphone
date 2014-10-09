@@ -44,13 +44,6 @@ imaphone_component::imaphone_component ()
     addAndMakeVisible (groupComponent2 = new GroupComponent ("new group",
                                                              TRANS("waveform")));
 
-    addAndMakeVisible (imageButton = new ImageButton ("new button"));
-    imageButton->addListener (this);
-
-    imageButton->setImages (false, true, true,
-                            ImageCache::getFromMemory (fa_arrow_right_svg, fa_arrow_right_svgSize), 1.000f, Colour (0x00000000),
-                            Image(), 1.000f, Colour (0x00000000),
-                            Image(), 1.000f, Colour (0x00000000));
     addAndMakeVisible (component = new image_component());
     component->setName ("new component");
 
@@ -75,6 +68,30 @@ imaphone_component::imaphone_component ()
     label2->setColour (TextEditor::textColourId, Colours::black);
     label2->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
+    addAndMakeVisible (toggleButton = new ToggleButton ("new toggle button"));
+    toggleButton->setButtonText (TRANS("r"));
+    toggleButton->addListener (this);
+
+    addAndMakeVisible (toggleButton2 = new ToggleButton ("new toggle button"));
+    toggleButton2->setButtonText (TRANS("g"));
+    toggleButton2->addListener (this);
+
+    addAndMakeVisible (toggleButton3 = new ToggleButton ("new toggle button"));
+    toggleButton3->setButtonText (TRANS("b"));
+    toggleButton3->addListener (this);
+
+    addAndMakeVisible (toggleButton4 = new ToggleButton ("new toggle button"));
+    toggleButton4->setButtonText (TRANS("gs"));
+    toggleButton4->addListener (this);
+
+    addAndMakeVisible (textButton = new TextButton ("new button"));
+    textButton->setButtonText (TRANS("->"));
+    textButton->addListener (this);
+
+    addAndMakeVisible (textButton2 = new TextButton ("new button"));
+    textButton2->setButtonText (TRANS("<-"));
+    textButton2->addListener (this);
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -94,11 +111,16 @@ imaphone_component::~imaphone_component()
     label = nullptr;
     groupComponent = nullptr;
     groupComponent2 = nullptr;
-    imageButton = nullptr;
     component = nullptr;
     component2 = nullptr;
     comboBox = nullptr;
     label2 = nullptr;
+    toggleButton = nullptr;
+    toggleButton2 = nullptr;
+    toggleButton3 = nullptr;
+    toggleButton4 = nullptr;
+    textButton = nullptr;
+    textButton2 = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -122,28 +144,18 @@ void imaphone_component::resized()
     label->setBounds (8, 8, 112, 32);
     groupComponent->setBounds (8, 32, 264, 368);
     groupComponent2->setBounds (328, 32, 264, 368);
-    imageButton->setBounds (280, 200, 40, 32);
     component->setBounds (16, 48, 248, 248);
     component2->setBounds (336, 48, 248, 248);
     comboBox->setBounds (112, 304, 150, 24);
     label2->setBounds (16, 304, 80, 24);
+    toggleButton->setBounds (24, 336, 32, 24);
+    toggleButton2->setBounds (64, 336, 32, 24);
+    toggleButton3->setBounds (104, 336, 32, 24);
+    toggleButton4->setBounds (144, 336, 40, 24);
+    textButton->setBounds (272, 144, 55, 24);
+    textButton2->setBounds (272, 176, 55, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
-}
-
-void imaphone_component::buttonClicked (Button* buttonThatWasClicked)
-{
-    //[UserbuttonClicked_Pre]
-    //[/UserbuttonClicked_Pre]
-
-    if (buttonThatWasClicked == imageButton)
-    {
-        //[UserButtonCode_imageButton] -- add your button handler code here..
-        //[/UserButtonCode_imageButton]
-    }
-
-    //[UserbuttonClicked_Post]
-    //[/UserbuttonClicked_Post]
 }
 
 void imaphone_component::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
@@ -159,6 +171,46 @@ void imaphone_component::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 
     //[UsercomboBoxChanged_Post]
     //[/UsercomboBoxChanged_Post]
+}
+
+void imaphone_component::buttonClicked (Button* buttonThatWasClicked)
+{
+    //[UserbuttonClicked_Pre]
+    //[/UserbuttonClicked_Pre]
+
+    if (buttonThatWasClicked == toggleButton)
+    {
+        //[UserButtonCode_toggleButton] -- add your button handler code here..
+        //[/UserButtonCode_toggleButton]
+    }
+    else if (buttonThatWasClicked == toggleButton2)
+    {
+        //[UserButtonCode_toggleButton2] -- add your button handler code here..
+        //[/UserButtonCode_toggleButton2]
+    }
+    else if (buttonThatWasClicked == toggleButton3)
+    {
+        //[UserButtonCode_toggleButton3] -- add your button handler code here..
+        //[/UserButtonCode_toggleButton3]
+    }
+    else if (buttonThatWasClicked == toggleButton4)
+    {
+        //[UserButtonCode_toggleButton4] -- add your button handler code here..
+        //[/UserButtonCode_toggleButton4]
+    }
+    else if (buttonThatWasClicked == textButton)
+    {
+        //[UserButtonCode_textButton] -- add your button handler code here..
+        //[/UserButtonCode_textButton]
+    }
+    else if (buttonThatWasClicked == textButton2)
+    {
+        //[UserButtonCode_textButton2] -- add your button handler code here..
+        //[/UserButtonCode_textButton2]
+    }
+
+    //[UserbuttonClicked_Post]
+    //[/UserbuttonClicked_Post]
 }
 
 
@@ -190,12 +242,6 @@ BEGIN_JUCER_METADATA
                   virtualName="" explicitFocusOrder="0" pos="8 32 264 368" title="image"/>
   <GROUPCOMPONENT name="new group" id="f0cb1b564ec62f53" memberName="groupComponent2"
                   virtualName="" explicitFocusOrder="0" pos="328 32 264 368" title="waveform"/>
-  <IMAGEBUTTON name="new button" id="4d532c341dbc639" memberName="imageButton"
-               virtualName="" explicitFocusOrder="0" pos="280 200 40 32" buttonText="new button"
-               connectedEdges="0" needsCallback="1" radioGroupId="0" keepProportions="1"
-               resourceNormal="fa_arrow_right_svg" opacityNormal="1" colourNormal="0"
-               resourceOver="" opacityOver="1" colourOver="0" resourceDown=""
-               opacityDown="1" colourDown="0"/>
   <GENERICCOMPONENT name="new component" id="47ed444cbfc17b76" memberName="component"
                     virtualName="" explicitFocusOrder="0" pos="16 48 248 248" class="image_component"
                     params=""/>
@@ -211,6 +257,24 @@ BEGIN_JUCER_METADATA
          edBkgCol="0" labelText="scan pattern" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
+  <TOGGLEBUTTON name="new toggle button" id="c68317834d28f2f9" memberName="toggleButton"
+                virtualName="" explicitFocusOrder="0" pos="24 336 32 24" buttonText="r"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+  <TOGGLEBUTTON name="new toggle button" id="fa97bc69cb5f2157" memberName="toggleButton2"
+                virtualName="" explicitFocusOrder="0" pos="64 336 32 24" buttonText="g"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+  <TOGGLEBUTTON name="new toggle button" id="8a97afda47542016" memberName="toggleButton3"
+                virtualName="" explicitFocusOrder="0" pos="104 336 32 24" buttonText="b"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+  <TOGGLEBUTTON name="new toggle button" id="e26c5493a23d1c34" memberName="toggleButton4"
+                virtualName="" explicitFocusOrder="0" pos="144 336 40 24" buttonText="gs"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+  <TEXTBUTTON name="new button" id="75dc2166e80c51c9" memberName="textButton"
+              virtualName="" explicitFocusOrder="0" pos="272 144 55 24" buttonText="-&gt;"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="new button" id="4713648ba57ab77f" memberName="textButton2"
+              virtualName="" explicitFocusOrder="0" pos="272 176 55 24" buttonText="&lt;-"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
