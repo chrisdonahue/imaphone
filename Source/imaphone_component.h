@@ -55,9 +55,6 @@ public:
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
     void buttonClicked (Button* buttonThatWasClicked);
 
-    // Binary resources:
-    static const char* fa_arrow_right_svg;
-    static const int fa_arrow_right_svgSize;
 
 
 private:
