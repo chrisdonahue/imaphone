@@ -5,6 +5,26 @@
               jucerVersion="3.1.0">
   <MAINGROUP id="qGxPnb" name="imaphone">
     <GROUP id="{CC313D07-DA6A-59AA-3734-DC5783942DF2}" name="Source">
+      <GROUP id="{0973D791-CFAD-047F-B5CB-35F1A831AD67}" name="auxilliary">
+        <FILE id="G8tHIb" name="audio_util.cpp" compile="1" resource="0" file="Source/auxilliary/audio_util.cpp"/>
+        <FILE id="LW8H5W" name="audio_util.h" compile="0" resource="0" file="Source/auxilliary/audio_util.h"/>
+        <FILE id="S4wbEx" name="juce_file_io.cpp" compile="1" resource="0"
+              file="Source/auxilliary/juce_file_io.cpp"/>
+        <FILE id="lubtuT" name="juce_file_io.h" compile="0" resource="0" file="Source/auxilliary/juce_file_io.h"/>
+        <FILE id="AHmAIY" name="logger.cpp" compile="1" resource="0" file="Source/auxilliary/logger.cpp"/>
+        <FILE id="jKu1KP" name="logger.h" compile="0" resource="0" file="Source/auxilliary/logger.h"/>
+      </GROUP>
+      <GROUP id="{584F85D1-2904-5FD5-4803-A40EC0C102D9}" name="dependencies">
+        <GROUP id="{1AFA96A9-D811-3C8E-82B0-FFD3EF384941}" name="kiss_fft130">
+          <FILE id="F1Qcis" name="_kiss_fft_guts.h" compile="0" resource="0"
+                file="Source/dependencies/kiss_fft130/_kiss_fft_guts.h"/>
+          <FILE id="kTfpBp" name="kiss_fft.c" compile="1" resource="0" file="Source/dependencies/kiss_fft130/kiss_fft.c"/>
+          <FILE id="UuZIbB" name="kiss_fft.h" compile="0" resource="0" file="Source/dependencies/kiss_fft130/kiss_fft.h"/>
+          <FILE id="U6wZgU" name="kiss_fftr.c" compile="1" resource="0" file="Source/dependencies/kiss_fft130/kiss_fftr.c"/>
+          <FILE id="JTP8Ia" name="kiss_fftr.h" compile="0" resource="0" file="Source/dependencies/kiss_fft130/kiss_fftr.h"/>
+          <FILE id="UQT1Jx" name="kissfft.hh" compile="0" resource="0" file="Source/dependencies/kiss_fft130/kissfft.hh"/>
+        </GROUP>
+      </GROUP>
       <FILE id="LsMq2S" name="image_component.cpp" compile="1" resource="0"
             file="Source/image_component.cpp"/>
       <FILE id="EvBLCD" name="image_component.h" compile="0" resource="0"

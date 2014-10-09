@@ -22,6 +22,9 @@
 
 //[Headers]     -- You can add your own extra header files here --
 #include "JuceHeader.h"
+
+#include "image_component.h"
+#include "waveform_component.h"
 //[/Headers]
 
 

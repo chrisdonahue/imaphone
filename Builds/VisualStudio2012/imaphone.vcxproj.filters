@@ -8,6 +8,15 @@
     <Filter Include="imaphone\Source">
       <UniqueIdentifier>{2E5A0B88-4318-7103-ACBD-695CCE5EA9D1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="imaphone\Source\auxilliary">
+      <UniqueIdentifier>{A1014ACF-3501-E8CB-9BBF-F5D00F032DAD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imaphone\Source\dependencies">
+      <UniqueIdentifier>{E0132886-4F6B-8299-CA55-B3A539757880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imaphone\Source\dependencies\kiss_fft130">
+      <UniqueIdentifier>{C45AE2BA-211C-DB6B-3FE4-8AD616D50791}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Juce Modules">
       <UniqueIdentifier>{422C46B7-0467-2DB0-BF3C-16DFCAFD69AC}</UniqueIdentifier>
     </Filter>
@@ -295,6 +304,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\auxilliary\audio_util.cpp">
+      <Filter>imaphone\Source\auxilliary</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\auxilliary\juce_file_io.cpp">
+      <Filter>imaphone\Source\auxilliary</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\auxilliary\logger.cpp">
+      <Filter>imaphone\Source\auxilliary</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.c">
+      <Filter>imaphone\Source\dependencies\kiss_fft130</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\dependencies\kiss_fft130\kiss_fftr.c">
+      <Filter>imaphone\Source\dependencies\kiss_fft130</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\image_component.cpp">
       <Filter>imaphone\Source</Filter>
     </ClCompile>
@@ -1503,6 +1527,27 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\auxilliary\audio_util.h">
+      <Filter>imaphone\Source\auxilliary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\auxilliary\juce_file_io.h">
+      <Filter>imaphone\Source\auxilliary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\auxilliary\logger.h">
+      <Filter>imaphone\Source\auxilliary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\dependencies\kiss_fft130\_kiss_fft_guts.h">
+      <Filter>imaphone\Source\dependencies\kiss_fft130</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.h">
+      <Filter>imaphone\Source\dependencies\kiss_fft130</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\dependencies\kiss_fft130\kiss_fftr.h">
+      <Filter>imaphone\Source\dependencies\kiss_fft130</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\dependencies\kiss_fft130\kissfft.hh">
+      <Filter>imaphone\Source\dependencies\kiss_fft130</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\image_component.h">
       <Filter>imaphone\Source</Filter>
     </ClInclude>

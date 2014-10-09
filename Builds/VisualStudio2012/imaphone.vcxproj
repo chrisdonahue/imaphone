@@ -131,6 +131,11 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\auxilliary\audio_util.cpp"/>
+    <ClCompile Include="..\..\Source\auxilliary\juce_file_io.cpp"/>
+    <ClCompile Include="..\..\Source\auxilliary\logger.cpp"/>
+    <ClCompile Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.c"/>
+    <ClCompile Include="..\..\Source\dependencies\kiss_fft130\kiss_fftr.c"/>
     <ClCompile Include="..\..\Source\image_component.cpp"/>
     <ClCompile Include="..\..\Source\waveform_component.cpp"/>
     <ClCompile Include="..\..\Source\imaphone_component.cpp"/>
@@ -1230,6 +1235,13 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_video\juce_video.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\auxilliary\audio_util.h"/>
+    <ClInclude Include="..\..\Source\auxilliary\juce_file_io.h"/>
+    <ClInclude Include="..\..\Source\auxilliary\logger.h"/>
+    <ClInclude Include="..\..\Source\dependencies\kiss_fft130\_kiss_fft_guts.h"/>
+    <ClInclude Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.h"/>
+    <ClInclude Include="..\..\Source\dependencies\kiss_fft130\kiss_fftr.h"/>
+    <ClInclude Include="..\..\Source\dependencies\kiss_fft130\kissfft.hh"/>
     <ClInclude Include="..\..\Source\image_component.h"/>
     <ClInclude Include="..\..\Source\waveform_component.h"/>
     <ClInclude Include="..\..\Source\imaphone_component.h"/>
