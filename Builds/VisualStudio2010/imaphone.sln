@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{68B3C458-DE4D-BC69-C4D5-DEBC2D8AA676}") = "imaphone", "imaphone.vcxproj", "{B3EC6840-ACDF-4D5E-8475-098B155C3E94}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3EC6840-ACDF-4D5E-8475-098B155C3E94}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B3EC6840-ACDF-4D5E-8475-098B155C3E94}.Debug|Win32.Build.0 = Debug|Win32
+		{B3EC6840-ACDF-4D5E-8475-098B155C3E94}.Release|Win32.ActiveCfg = Release|Win32
+		{B3EC6840-ACDF-4D5E-8475-098B155C3E94}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
