@@ -298,9 +298,6 @@
     <ClCompile Include="..\..\Source\imaphone_component.cpp">
       <Filter>imaphone\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\MainComponent.cpp">
-      <Filter>imaphone\Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Main.cpp">
       <Filter>imaphone\Source</Filter>
     </ClCompile>
@@ -1501,9 +1498,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\imaphone_component.h">
-      <Filter>imaphone\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\MainComponent.h">
       <Filter>imaphone\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h">

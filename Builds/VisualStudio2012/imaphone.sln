@@ -1,5 +1,5 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+# Visual Studio 2012
 Project("{68B3C458-DE4D-BC69-C4D5-DEBC2D8AA676}") = "imaphone", "imaphone.vcxproj", "{B3EC6840-ACDF-4D5E-8475-098B155C3E94}"
 EndProject
 Global
