@@ -34,7 +34,8 @@
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class image_component  : public Component
+class image_component  : public Component,
+                         public FileDragAndDropTarget
 {
 public:
     //==============================================================================
@@ -47,6 +48,16 @@ public:
 
     void paint (Graphics& g);
     void resized();
+    void filesDropped (const StringArray& filenames, int mouseX, int mouseY);
+    void mouseMove (const MouseEvent& e);
+    void mouseEnter (const MouseEvent& e);
+    void mouseExit (const MouseEvent& e);
+    void mouseDown (const MouseEvent& e);
+    void mouseDrag (const MouseEvent& e);
+    void mouseUp (const MouseEvent& e);
+    void mouseDoubleClick (const MouseEvent& e);
+    void mouseWheelMove (const MouseEvent& e, const MouseWheelDetails& wheel);
+    void modifierKeysChanged (const ModifierKeys& modifiers);
 
 
 

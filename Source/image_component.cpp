@@ -33,7 +33,7 @@ image_component::image_component ()
     //[UserPreSize]
     //[/UserPreSize]
 
-    setSize (600, 400);
+    setSize (496, 240);
 
 
     //[Constructor] You can add your own custom stuff here..
@@ -69,6 +69,66 @@ void image_component::resized()
     //[/UserResized]
 }
 
+void image_component::filesDropped (const StringArray& filenames, int mouseX, int mouseY)
+{
+    //[UserCode_filesDropped] -- Add your code here...
+    //[/UserCode_filesDropped]
+}
+
+void image_component::mouseMove (const MouseEvent& e)
+{
+    //[UserCode_mouseMove] -- Add your code here...
+    //[/UserCode_mouseMove]
+}
+
+void image_component::mouseEnter (const MouseEvent& e)
+{
+    //[UserCode_mouseEnter] -- Add your code here...
+    //[/UserCode_mouseEnter]
+}
+
+void image_component::mouseExit (const MouseEvent& e)
+{
+    //[UserCode_mouseExit] -- Add your code here...
+    //[/UserCode_mouseExit]
+}
+
+void image_component::mouseDown (const MouseEvent& e)
+{
+    //[UserCode_mouseDown] -- Add your code here...
+    //[/UserCode_mouseDown]
+}
+
+void image_component::mouseDrag (const MouseEvent& e)
+{
+    //[UserCode_mouseDrag] -- Add your code here...
+    //[/UserCode_mouseDrag]
+}
+
+void image_component::mouseUp (const MouseEvent& e)
+{
+    //[UserCode_mouseUp] -- Add your code here...
+    //[/UserCode_mouseUp]
+}
+
+void image_component::mouseDoubleClick (const MouseEvent& e)
+{
+    //[UserCode_mouseDoubleClick] -- Add your code here...
+    //[/UserCode_mouseDoubleClick]
+}
+
+void image_component::mouseWheelMove (const MouseEvent& e, const MouseWheelDetails& wheel)
+{
+    //[UserCode_mouseWheelMove] -- Add your code here...
+    //[/UserCode_mouseWheelMove]
+}
+
+void image_component::modifierKeysChanged (const ModifierKeys& modifiers)
+{
+    //[UserCode_modifierKeysChanged] -- Add your code here...
+    //[/UserCode_modifierKeysChanged]
+}
+
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
@@ -85,9 +145,22 @@ void image_component::resized()
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="image_component" componentName=""
-                 parentClasses="public Component" constructorParams="" variableInitialisers=""
-                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
-                 fixedSize="0" initialWidth="600" initialHeight="400">
+                 parentClasses="public Component, public FileDragAndDropTarget"
+                 constructorParams="" variableInitialisers="" snapPixels="8" snapActive="1"
+                 snapShown="1" overlayOpacity="0.330" fixedSize="1" initialWidth="496"
+                 initialHeight="240">
+  <METHODS>
+    <METHOD name="filesDropped (const StringArray&amp; filenames, int mouseX, int mouseY)"/>
+    <METHOD name="mouseMove (const MouseEvent&amp; e)"/>
+    <METHOD name="mouseEnter (const MouseEvent&amp; e)"/>
+    <METHOD name="mouseExit (const MouseEvent&amp; e)"/>
+    <METHOD name="mouseDown (const MouseEvent&amp; e)"/>
+    <METHOD name="mouseDrag (const MouseEvent&amp; e)"/>
+    <METHOD name="mouseUp (const MouseEvent&amp; e)"/>
+    <METHOD name="mouseDoubleClick (const MouseEvent&amp; e)"/>
+    <METHOD name="mouseWheelMove (const MouseEvent&amp; e, const MouseWheelDetails&amp; wheel)"/>
+    <METHOD name="modifierKeysChanged (const ModifierKeys&amp; modifiers)"/>
+  </METHODS>
   <BACKGROUND backgroundColour="ffffffff"/>
 </JUCER_COMPONENT>
 

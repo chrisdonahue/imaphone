@@ -107,7 +107,7 @@ void waveform_component::paint (Graphics& g)
 
     g.fillAll (Colours::white);
 
-	//[UserPaint] Add your own custom painting code here..
+    //[UserPaint] Add your own custom painting code here..
 	if (audio_data == nullptr) {
 		return;
 	}
@@ -240,7 +240,7 @@ BEGIN_JUCER_METADATA
 <JUCER_COMPONENT documentType="Component" className="waveform_component" componentName=""
                  parentClasses="public Component, public FileDragAndDropTarget"
                  constructorParams="" variableInitialisers="" snapPixels="8" snapActive="1"
-                 snapShown="1" overlayOpacity="0.330" fixedSize="0" initialWidth="496"
+                 snapShown="1" overlayOpacity="0.330" fixedSize="1" initialWidth="496"
                  initialHeight="240">
   <METHODS>
     <METHOD name="filesDropped (const StringArray&amp; filenames, int mouseX, int mouseY)"/>
