@@ -59,22 +59,26 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
+	std::vector<ToggleButton*>* color_radios;
+
+	void color_radios_clear(ToggleButton* exclude);
     //[/UserVariables]
 
     //==============================================================================
     ScopedPointer<Label> label;
     ScopedPointer<GroupComponent> groupComponent;
     ScopedPointer<GroupComponent> groupComponent2;
-    ScopedPointer<image_component> component;
-    ScopedPointer<waveform_component> component2;
+    ScopedPointer<image_component> image;
+    ScopedPointer<waveform_component> waveform;
     ScopedPointer<ComboBox> comboBox;
     ScopedPointer<Label> label2;
-    ScopedPointer<ToggleButton> toggleButton;
-    ScopedPointer<ToggleButton> toggleButton2;
-    ScopedPointer<ToggleButton> toggleButton3;
-    ScopedPointer<ToggleButton> toggleButton4;
+    ScopedPointer<ToggleButton> color_radio_red;
+    ScopedPointer<ToggleButton> color_radio_green;
+    ScopedPointer<ToggleButton> color_radio_blue;
+    ScopedPointer<ToggleButton> color_radio_greyscale;
     ScopedPointer<TextButton> textButton;
     ScopedPointer<TextButton> textButton2;
+    ScopedPointer<TextButton> color_preview;
 
 
     //==============================================================================

@@ -62,7 +62,20 @@ void image_component::paint (Graphics& g)
     //[UserPaint] Add your own custom painting code here..
 	const ScopedLock sl (image_lock);
 
-	g.drawImageWithin(image, 0, 0, this->getWidth(), this->getHeight(), RectanglePlacement::centred);
+	Image& current = image;
+	switch (color_current) {
+	case red:
+		current = image_red;
+	case green:
+		current = image_green;
+	case blue:
+		current = image_blue;
+	case greyscale:
+		current = image_greyscale;
+	default:
+		current = image;
+	}
+	g.drawImageWithin(current, 0, 0, this->getWidth(), this->getHeight(), RectanglePlacement::centred);
     //[/UserPaint]
 }
 
@@ -78,7 +91,8 @@ void image_component::filesDropped (const StringArray& filenames, int mouseX, in
 	const ScopedLock sl (image_lock);
 	const File& dropped_file(filenames[0]);
 	image = ImageFileFormat::loadFrom(dropped_file);
-	this->repaint();
+	process_image();
+	repaint();
     //[/UserCode_filesDropped]
 }
 
@@ -139,6 +153,40 @@ void image_component::modifierKeysChanged (const ModifierKeys& modifiers)
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
+void image_component::set_color_full_preview(bool preview) {
+	color_full_preview = preview;
+	repaint();
+}
+
+void image_component::set_color_signal(color_signal color) {
+	color_current = color;
+	repaint();
+}
+
+void image_component::process_image() {
+	image_red = image.createCopy();
+	image_green = image.createCopy();
+	image_blue = image.createCopy();
+	image_greyscale = image.createCopy();
+	int width = image.getWidth();
+	int height = image.getHeight();
+
+	for (int x = 0; x < width; x++) {
+		for (int y = 0; y < width; y++) {
+			Colour pixel_current = image.getPixelAt(x, y);
+			uint8 red = pixel_current.getRed();
+			uint8 green = pixel_current.getGreen();
+			uint8 blue = pixel_current.getBlue();
+			uint8 alpha = pixel_current.getAlpha();
+			uint8 average = (uint8) (float(red + green + blue) / 3.0f);
+			image_red.setPixelAt(x, y, Colour(red, 0, 0, alpha));
+			image_green.setPixelAt(x, y, Colour(0, green, 0, alpha));
+			image_blue.setPixelAt(x, y, Colour(0, 0, blue, alpha));
+			image_greyscale.setPixelAt(x, y, Colour(average, average, average, alpha));
+		}
+	}
+}
+
 bool image_component::isInterestedInFileDrag (const StringArray& files)
 {
 	return files.size() == 1;

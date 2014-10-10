@@ -44,11 +44,11 @@ imaphone_component::imaphone_component ()
     addAndMakeVisible (groupComponent2 = new GroupComponent ("new group",
                                                              TRANS("waveform")));
 
-    addAndMakeVisible (component = new image_component());
-    component->setName ("new component");
+    addAndMakeVisible (image = new image_component());
+    image->setName ("new component");
 
-    addAndMakeVisible (component2 = new waveform_component());
-    component2->setName ("new component");
+    addAndMakeVisible (waveform = new waveform_component());
+    waveform->setName ("new component");
 
     addAndMakeVisible (comboBox = new ComboBox ("new combo box"));
     comboBox->setEditableText (false);
@@ -68,21 +68,22 @@ imaphone_component::imaphone_component ()
     label2->setColour (TextEditor::textColourId, Colours::black);
     label2->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    addAndMakeVisible (toggleButton = new ToggleButton ("new toggle button"));
-    toggleButton->setButtonText (TRANS("r"));
-    toggleButton->addListener (this);
+    addAndMakeVisible (color_radio_red = new ToggleButton ("new toggle button"));
+    color_radio_red->setButtonText (TRANS("r"));
+    color_radio_red->addListener (this);
+    color_radio_red->setToggleState (true, dontSendNotification);
 
-    addAndMakeVisible (toggleButton2 = new ToggleButton ("new toggle button"));
-    toggleButton2->setButtonText (TRANS("g"));
-    toggleButton2->addListener (this);
+    addAndMakeVisible (color_radio_green = new ToggleButton ("new toggle button"));
+    color_radio_green->setButtonText (TRANS("g"));
+    color_radio_green->addListener (this);
 
-    addAndMakeVisible (toggleButton3 = new ToggleButton ("new toggle button"));
-    toggleButton3->setButtonText (TRANS("b"));
-    toggleButton3->addListener (this);
+    addAndMakeVisible (color_radio_blue = new ToggleButton ("new toggle button"));
+    color_radio_blue->setButtonText (TRANS("b"));
+    color_radio_blue->addListener (this);
 
-    addAndMakeVisible (toggleButton4 = new ToggleButton ("new toggle button"));
-    toggleButton4->setButtonText (TRANS("gs"));
-    toggleButton4->addListener (this);
+    addAndMakeVisible (color_radio_greyscale = new ToggleButton ("new toggle button"));
+    color_radio_greyscale->setButtonText (TRANS("gs"));
+    color_radio_greyscale->addListener (this);
 
     addAndMakeVisible (textButton = new TextButton ("new button"));
     textButton->setButtonText (TRANS("->"));
@@ -92,6 +93,11 @@ imaphone_component::imaphone_component ()
     textButton2->setButtonText (TRANS("<-"));
     textButton2->addListener (this);
 
+    addAndMakeVisible (color_preview = new TextButton ("new button"));
+    color_preview->setTooltip (TRANS("hold me down baby"));
+    color_preview->setButtonText (TRANS("preview color"));
+    color_preview->addListener (this);
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -100,6 +106,12 @@ imaphone_component::imaphone_component ()
 
 
     //[Constructor] You can add your own custom stuff here..
+	// put color radios into vector
+	color_radios = new std::vector<ToggleButton*>(0);
+	color_radios->push_back(color_radio_red);
+	color_radios->push_back(color_radio_green);
+	color_radios->push_back(color_radio_blue);
+	color_radios->push_back(color_radio_greyscale);
     //[/Constructor]
 }
 
@@ -111,19 +123,21 @@ imaphone_component::~imaphone_component()
     label = nullptr;
     groupComponent = nullptr;
     groupComponent2 = nullptr;
-    component = nullptr;
-    component2 = nullptr;
+    image = nullptr;
+    waveform = nullptr;
     comboBox = nullptr;
     label2 = nullptr;
-    toggleButton = nullptr;
-    toggleButton2 = nullptr;
-    toggleButton3 = nullptr;
-    toggleButton4 = nullptr;
+    color_radio_red = nullptr;
+    color_radio_green = nullptr;
+    color_radio_blue = nullptr;
+    color_radio_greyscale = nullptr;
     textButton = nullptr;
     textButton2 = nullptr;
+    color_preview = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
+	delete color_radios;
     //[/Destructor]
 }
 
@@ -141,19 +155,20 @@ void imaphone_component::paint (Graphics& g)
 
 void imaphone_component::resized()
 {
-    label->setBounds (8, 8, 112, 32);
+    label->setBounds (8, 0, 112, 32);
     groupComponent->setBounds (8, 32, 264, 368);
     groupComponent2->setBounds (328, 32, 264, 368);
-    component->setBounds (16, 48, 248, 248);
-    component2->setBounds (336, 48, 248, 248);
+    image->setBounds (16, 48, 248, 248);
+    waveform->setBounds (336, 48, 248, 248);
     comboBox->setBounds (112, 304, 150, 24);
     label2->setBounds (16, 304, 80, 24);
-    toggleButton->setBounds (24, 336, 32, 24);
-    toggleButton2->setBounds (64, 336, 32, 24);
-    toggleButton3->setBounds (104, 336, 32, 24);
-    toggleButton4->setBounds (144, 336, 40, 24);
+    color_radio_red->setBounds (24, 336, 32, 24);
+    color_radio_green->setBounds (64, 336, 32, 24);
+    color_radio_blue->setBounds (104, 336, 32, 24);
+    color_radio_greyscale->setBounds (144, 336, 40, 24);
     textButton->setBounds (272, 144, 55, 24);
     textButton2->setBounds (272, 176, 55, 24);
+    color_preview->setBounds (192, 336, 64, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -178,25 +193,33 @@ void imaphone_component::buttonClicked (Button* buttonThatWasClicked)
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
 
-    if (buttonThatWasClicked == toggleButton)
+    if (buttonThatWasClicked == color_radio_red)
     {
-        //[UserButtonCode_toggleButton] -- add your button handler code here..
-        //[/UserButtonCode_toggleButton]
+        //[UserButtonCode_color_radio_red] -- add your button handler code here..
+		color_radios_clear(color_radio_red);
+		image->set_color_signal(image_component::color_signal::red);
+        //[/UserButtonCode_color_radio_red]
     }
-    else if (buttonThatWasClicked == toggleButton2)
+    else if (buttonThatWasClicked == color_radio_green)
     {
-        //[UserButtonCode_toggleButton2] -- add your button handler code here..
-        //[/UserButtonCode_toggleButton2]
+        //[UserButtonCode_color_radio_green] -- add your button handler code here..
+		color_radios_clear(color_radio_green);
+		image->set_color_signal(image_component::color_signal::green);
+        //[/UserButtonCode_color_radio_green]
     }
-    else if (buttonThatWasClicked == toggleButton3)
+    else if (buttonThatWasClicked == color_radio_blue)
     {
-        //[UserButtonCode_toggleButton3] -- add your button handler code here..
-        //[/UserButtonCode_toggleButton3]
+        //[UserButtonCode_color_radio_blue] -- add your button handler code here..
+		color_radios_clear(color_radio_blue);
+		image->set_color_signal(image_component::color_signal::blue);
+        //[/UserButtonCode_color_radio_blue]
     }
-    else if (buttonThatWasClicked == toggleButton4)
+    else if (buttonThatWasClicked == color_radio_greyscale)
     {
-        //[UserButtonCode_toggleButton4] -- add your button handler code here..
-        //[/UserButtonCode_toggleButton4]
+        //[UserButtonCode_color_radio_greyscale] -- add your button handler code here..
+		color_radios_clear(color_radio_greyscale);
+		image->set_color_signal(image_component::color_signal::greyscale);
+        //[/UserButtonCode_color_radio_greyscale]
     }
     else if (buttonThatWasClicked == textButton)
     {
@@ -208,6 +231,11 @@ void imaphone_component::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_textButton2] -- add your button handler code here..
         //[/UserButtonCode_textButton2]
     }
+    else if (buttonThatWasClicked == color_preview)
+    {
+        //[UserButtonCode_color_preview] -- add your button handler code here..
+        //[/UserButtonCode_color_preview]
+    }
 
     //[UserbuttonClicked_Post]
     //[/UserbuttonClicked_Post]
@@ -216,6 +244,17 @@ void imaphone_component::buttonClicked (Button* buttonThatWasClicked)
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
+void imaphone_component::color_radios_clear(ToggleButton* exclude=nullptr) {
+	for (std::vector<ToggleButton*>::iterator it = color_radios->begin(); it != color_radios->end(); ++it) {
+		ToggleButton* current = (*it);
+		if (current == exclude) {
+			continue;
+		}
+		else {
+			current->setToggleState(false, NotificationType::dontSendNotification);
+		}
+	}
+}
 //[/MiscUserCode]
 
 
@@ -234,7 +273,7 @@ BEGIN_JUCER_METADATA
                  fixedSize="1" initialWidth="600" initialHeight="400">
   <BACKGROUND backgroundColour="fff5f5f5"/>
   <LABEL name="new label" id="e8473a24522c9b8f" memberName="label" virtualName=""
-         explicitFocusOrder="0" pos="8 8 112 32" textCol="ff4f58c9" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="8 0 112 32" textCol="ff4f58c9" edTextCol="ff000000"
          edBkgCol="0" labelText="imaphone" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="24"
          bold="0" italic="0" justification="33"/>
@@ -242,10 +281,10 @@ BEGIN_JUCER_METADATA
                   virtualName="" explicitFocusOrder="0" pos="8 32 264 368" title="image"/>
   <GROUPCOMPONENT name="new group" id="f0cb1b564ec62f53" memberName="groupComponent2"
                   virtualName="" explicitFocusOrder="0" pos="328 32 264 368" title="waveform"/>
-  <GENERICCOMPONENT name="new component" id="47ed444cbfc17b76" memberName="component"
+  <GENERICCOMPONENT name="new component" id="47ed444cbfc17b76" memberName="image"
                     virtualName="" explicitFocusOrder="0" pos="16 48 248 248" class="image_component"
                     params=""/>
-  <GENERICCOMPONENT name="new component" id="488d7df3e5aa6c5" memberName="component2"
+  <GENERICCOMPONENT name="new component" id="488d7df3e5aa6c5" memberName="waveform"
                     virtualName="" explicitFocusOrder="0" pos="336 48 248 248" class="waveform_component"
                     params=""/>
   <COMBOBOX name="new combo box" id="43e8bee5de81e80" memberName="comboBox"
@@ -257,16 +296,16 @@ BEGIN_JUCER_METADATA
          edBkgCol="0" labelText="scan pattern" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
-  <TOGGLEBUTTON name="new toggle button" id="c68317834d28f2f9" memberName="toggleButton"
+  <TOGGLEBUTTON name="new toggle button" id="c68317834d28f2f9" memberName="color_radio_red"
                 virtualName="" explicitFocusOrder="0" pos="24 336 32 24" buttonText="r"
-                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
-  <TOGGLEBUTTON name="new toggle button" id="fa97bc69cb5f2157" memberName="toggleButton2"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="1"/>
+  <TOGGLEBUTTON name="new toggle button" id="fa97bc69cb5f2157" memberName="color_radio_green"
                 virtualName="" explicitFocusOrder="0" pos="64 336 32 24" buttonText="g"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
-  <TOGGLEBUTTON name="new toggle button" id="8a97afda47542016" memberName="toggleButton3"
+  <TOGGLEBUTTON name="new toggle button" id="8a97afda47542016" memberName="color_radio_blue"
                 virtualName="" explicitFocusOrder="0" pos="104 336 32 24" buttonText="b"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
-  <TOGGLEBUTTON name="new toggle button" id="e26c5493a23d1c34" memberName="toggleButton4"
+  <TOGGLEBUTTON name="new toggle button" id="e26c5493a23d1c34" memberName="color_radio_greyscale"
                 virtualName="" explicitFocusOrder="0" pos="144 336 40 24" buttonText="gs"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TEXTBUTTON name="new button" id="75dc2166e80c51c9" memberName="textButton"
@@ -275,6 +314,10 @@ BEGIN_JUCER_METADATA
   <TEXTBUTTON name="new button" id="4713648ba57ab77f" memberName="textButton2"
               virtualName="" explicitFocusOrder="0" pos="272 176 55 24" buttonText="&lt;-"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="new button" id="38cee5d35e47c37f" memberName="color_preview"
+              virtualName="" explicitFocusOrder="0" pos="192 336 64 24" tooltip="hold me down baby"
+              buttonText="preview color" connectedEdges="0" needsCallback="1"
+              radioGroupId="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

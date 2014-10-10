@@ -22,6 +22,8 @@
 
 //[Headers]     -- You can add your own extra header files here --
 #include "JuceHeader.h"
+
+enum color_signal;
 //[/Headers]
 
 
@@ -45,6 +47,10 @@ public:
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
 	bool isInterestedInFileDrag (const StringArray& files);
+
+	enum color_signal {red, green, blue, greyscale};
+	void set_color_full_preview(bool preview);
+	void set_color_signal(color_signal color);
     //[/UserMethods]
 
     void paint (Graphics& g);
@@ -60,13 +66,19 @@ public:
     void mouseWheelMove (const MouseEvent& e, const MouseWheelDetails& wheel);
     void modifierKeysChanged (const ModifierKeys& modifiers);
 
-
-
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
 	CriticalSection image_lock;
 	Image image;
+	Image image_red;
+	Image image_green;
+	Image image_blue;
+	Image image_greyscale;
 
+	color_signal color_current;
+	bool color_full_preview;
+
+	void process_image();
     //[/UserVariables]
 
     //==============================================================================
