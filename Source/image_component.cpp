@@ -64,14 +64,18 @@ void image_component::paint (Graphics& g)
 
 	Image& current = image;
 	switch (color_current) {
-	case red:
+	case color_signal::red:
 		current = image_red;
-	case green:
+		break;
+	case color_signal::green:
 		current = image_green;
-	case blue:
+		break;
+	case color_signal::blue:
 		current = image_blue;
-	case greyscale:
+		break;
+	case color_signal::greyscale:
 		current = image_greyscale;
+		break;
 	default:
 		current = image;
 	}

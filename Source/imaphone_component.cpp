@@ -71,7 +71,6 @@ imaphone_component::imaphone_component ()
     addAndMakeVisible (color_radio_red = new ToggleButton ("new toggle button"));
     color_radio_red->setButtonText (TRANS("r"));
     color_radio_red->addListener (this);
-    color_radio_red->setToggleState (true, dontSendNotification);
 
     addAndMakeVisible (color_radio_green = new ToggleButton ("new toggle button"));
     color_radio_green->setButtonText (TRANS("g"));
@@ -112,6 +111,8 @@ imaphone_component::imaphone_component ()
 	color_radios->push_back(color_radio_green);
 	color_radios->push_back(color_radio_blue);
 	color_radios->push_back(color_radio_greyscale);
+
+	buttonClicked(color_radio_red);
     //[/Constructor]
 }
 
@@ -245,6 +246,9 @@ void imaphone_component::buttonClicked (Button* buttonThatWasClicked)
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 void imaphone_component::color_radios_clear(ToggleButton* exclude=nullptr) {
+	if (exclude != nullptr) {
+		exclude->setToggleState(true, NotificationType::dontSendNotification);
+	}
 	for (std::vector<ToggleButton*>::iterator it = color_radios->begin(); it != color_radios->end(); ++it) {
 		ToggleButton* current = (*it);
 		if (current == exclude) {
@@ -298,7 +302,7 @@ BEGIN_JUCER_METADATA
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TOGGLEBUTTON name="new toggle button" id="c68317834d28f2f9" memberName="color_radio_red"
                 virtualName="" explicitFocusOrder="0" pos="24 336 32 24" buttonText="r"
-                connectedEdges="0" needsCallback="1" radioGroupId="0" state="1"/>
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="fa97bc69cb5f2157" memberName="color_radio_green"
                 virtualName="" explicitFocusOrder="0" pos="64 336 32 24" buttonText="g"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
