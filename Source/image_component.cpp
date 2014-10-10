@@ -37,6 +37,7 @@ image_component::image_component ()
 
 
     //[Constructor] You can add your own custom stuff here..
+	color_full_preview = false;
     //[/Constructor]
 }
 
@@ -78,6 +79,9 @@ void image_component::paint (Graphics& g)
 		break;
 	default:
 		current = image;
+	}
+	if (color_full_preview) {
+		current = image_greyscale;
 	}
 	g.drawImageWithin(current, 0, 0, this->getWidth(), this->getHeight(), RectanglePlacement::centred);
     //[/UserPaint]

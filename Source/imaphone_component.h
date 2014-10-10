@@ -54,6 +54,8 @@ public:
     void resized();
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
     void buttonClicked (Button* buttonThatWasClicked);
+    void mouseDown (const MouseEvent& e);
+    void mouseUp (const MouseEvent& e);
 
 
 

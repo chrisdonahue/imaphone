@@ -95,7 +95,6 @@ imaphone_component::imaphone_component ()
     addAndMakeVisible (color_preview = new TextButton ("new button"));
     color_preview->setTooltip (TRANS("hold me down baby"));
     color_preview->setButtonText (TRANS("preview color"));
-    color_preview->addListener (this);
 
 
     //[UserPreSize]
@@ -113,6 +112,8 @@ imaphone_component::imaphone_component ()
 	color_radios->push_back(color_radio_greyscale);
 
 	buttonClicked(color_radio_red);
+
+	color_preview->setInterceptsMouseClicks(false, false);
     //[/Constructor]
 }
 
@@ -232,14 +233,29 @@ void imaphone_component::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_textButton2] -- add your button handler code here..
         //[/UserButtonCode_textButton2]
     }
-    else if (buttonThatWasClicked == color_preview)
-    {
-        //[UserButtonCode_color_preview] -- add your button handler code here..
-        //[/UserButtonCode_color_preview]
-    }
 
     //[UserbuttonClicked_Post]
     //[/UserbuttonClicked_Post]
+}
+
+void imaphone_component::mouseDown (const MouseEvent& e)
+{
+    //[UserCode_mouseDown] -- Add your code here...
+	if (color_preview->getBounds().contains(e.getPosition())) {
+		image->set_color_full_preview(true);
+		color_preview->setToggleState(true, NotificationType::dontSendNotification);
+	}
+    //[/UserCode_mouseDown]
+}
+
+void imaphone_component::mouseUp (const MouseEvent& e)
+{
+    //[UserCode_mouseUp] -- Add your code here...
+	if (color_preview->getBounds().contains(e.getMouseDownPosition())) {
+		image->set_color_full_preview(false);
+		color_preview->setToggleState(false, NotificationType::dontSendNotification);
+	}
+    //[/UserCode_mouseUp]
 }
 
 
@@ -275,6 +291,10 @@ BEGIN_JUCER_METADATA
                  parentClasses="public Component" constructorParams="" variableInitialisers=""
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
                  fixedSize="1" initialWidth="600" initialHeight="400">
+  <METHODS>
+    <METHOD name="mouseDown (const MouseEvent&amp; e)"/>
+    <METHOD name="mouseUp (const MouseEvent&amp; e)"/>
+  </METHODS>
   <BACKGROUND backgroundColour="fff5f5f5"/>
   <LABEL name="new label" id="e8473a24522c9b8f" memberName="label" virtualName=""
          explicitFocusOrder="0" pos="8 0 112 32" textCol="ff4f58c9" edTextCol="ff000000"
@@ -320,7 +340,7 @@ BEGIN_JUCER_METADATA
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="new button" id="38cee5d35e47c37f" memberName="color_preview"
               virtualName="" explicitFocusOrder="0" pos="192 336 64 24" tooltip="hold me down baby"
-              buttonText="preview color" connectedEdges="0" needsCallback="1"
+              buttonText="preview color" connectedEdges="0" needsCallback="0"
               radioGroupId="0"/>
 </JUCER_COMPONENT>
 
