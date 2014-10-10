@@ -53,7 +53,7 @@ imaphone_component::imaphone_component ()
     addAndMakeVisible (comboBox = new ComboBox ("new combo box"));
     comboBox->setEditableText (false);
     comboBox->setJustificationType (Justification::centredLeft);
-    comboBox->setTextWhenNothingSelected (TRANS("row"));
+    comboBox->setTextWhenNothingSelected (TRANS("choose..."));
     comboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     comboBox->addItem (TRANS("row"), 1);
     comboBox->addItem (TRANS("column"), 2);
@@ -111,9 +111,14 @@ imaphone_component::imaphone_component ()
 	color_radios->push_back(color_radio_blue);
 	color_radios->push_back(color_radio_greyscale);
 
-	buttonClicked(color_radio_red);
+	// click red radio button
+	color_radio_red->triggerClick();
 
+	// allow this component to detect onrelease for preview button
 	color_preview->setInterceptsMouseClicks(false, false);
+
+	// select row from combo box
+	comboBox->setSelectedId(1, NotificationType::sendNotification);
     //[/Constructor]
 }
 
@@ -313,7 +318,7 @@ BEGIN_JUCER_METADATA
                     params=""/>
   <COMBOBOX name="new combo box" id="43e8bee5de81e80" memberName="comboBox"
             virtualName="" explicitFocusOrder="0" pos="112 304 150 24" editable="0"
-            layout="33" items="row&#10;column&#10;spiral" textWhenNonSelected="row"
+            layout="33" items="row&#10;column&#10;spiral" textWhenNonSelected="choose..."
             textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="33ef735ddc98c1e" memberName="label2" virtualName=""
          explicitFocusOrder="0" pos="16 304 80 24" edTextCol="ff000000"

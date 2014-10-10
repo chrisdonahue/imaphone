@@ -63,27 +63,27 @@ void image_component::paint (Graphics& g)
     //[UserPaint] Add your own custom painting code here..
 	const ScopedLock sl (image_lock);
 
-	Image& current = image;
+	Image* current = &image;
 	switch (color_current) {
 	case color_signal::red:
-		current = image_red;
+		current = &image_red;
 		break;
 	case color_signal::green:
-		current = image_green;
+		current = &image_green;
 		break;
 	case color_signal::blue:
-		current = image_blue;
+		current = &image_blue;
 		break;
 	case color_signal::greyscale:
-		current = image_greyscale;
+		current = &image_greyscale;
 		break;
 	default:
-		current = image;
+		current = &image;
 	}
 	if (color_full_preview) {
-		current = image_greyscale;
+		current = &image;
 	}
-	g.drawImageWithin(current, 0, 0, this->getWidth(), this->getHeight(), RectanglePlacement::centred);
+	g.drawImageWithin(*current, 0, 0, this->getWidth(), this->getHeight(), RectanglePlacement::centred);
     //[/UserPaint]
 }
 
