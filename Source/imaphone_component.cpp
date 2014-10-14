@@ -47,9 +47,6 @@ imaphone_component::imaphone_component ()
     addAndMakeVisible (image = new image_component());
     image->setName ("new component");
 
-    addAndMakeVisible (waveform = new WaveformComponent());
-    waveform->setName ("new component");
-
     addAndMakeVisible (comboBox = new ComboBox ("new combo box"));
     comboBox->setEditableText (false);
     comboBox->setJustificationType (Justification::centredLeft);
@@ -119,6 +116,9 @@ imaphone_component::imaphone_component ()
 
 	// select row from combo box
 	comboBox->setSelectedId(1, NotificationType::sendNotification);
+
+    addAndMakeVisible (waveform = new WaveformComponent (transportSource));
+    waveform->setName ("new component");
     //[/Constructor]
 }
 
@@ -131,7 +131,6 @@ imaphone_component::~imaphone_component()
     groupComponent = nullptr;
     groupComponent2 = nullptr;
     image = nullptr;
-    waveform = nullptr;
     comboBox = nullptr;
     label2 = nullptr;
     color_radio_red = nullptr;
@@ -166,7 +165,6 @@ void imaphone_component::resized()
     groupComponent->setBounds (8, 32, 264, 368);
     groupComponent2->setBounds (328, 32, 264, 368);
     image->setBounds (16, 48, 248, 248);
-    waveform->setBounds (336, 48, 248, 248);
     comboBox->setBounds (112, 304, 150, 24);
     label2->setBounds (16, 304, 80, 24);
     color_radio_red->setBounds (24, 336, 32, 24);
@@ -312,9 +310,6 @@ BEGIN_JUCER_METADATA
                   virtualName="" explicitFocusOrder="0" pos="328 32 264 368" title="waveform"/>
   <GENERICCOMPONENT name="new component" id="47ed444cbfc17b76" memberName="image"
                     virtualName="" explicitFocusOrder="0" pos="16 48 248 248" class="image_component"
-                    params=""/>
-  <GENERICCOMPONENT name="new component" id="488d7df3e5aa6c5" memberName="waveform"
-                    virtualName="" explicitFocusOrder="0" pos="336 48 248 248" class="WaveformComponent"
                     params=""/>
   <COMBOBOX name="new combo box" id="43e8bee5de81e80" memberName="comboBox"
             virtualName="" explicitFocusOrder="0" pos="112 304 150 24" editable="0"

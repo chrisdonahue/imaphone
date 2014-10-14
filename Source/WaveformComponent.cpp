@@ -12,12 +12,11 @@
 #include "WaveformComponent.h"
 
 //==============================================================================
-WaveformComponent::WaveformComponent (AudioFormatManager& formatManager,
-                    AudioTransportSource& transportSource_,
-                    Slider& slider)
-    : transportSource (transportSource_),
-        zoomSlider (slider),
-        scrollbar (false),
+WaveformComponent::WaveformComponent (AudioTransportSource& transportSource_)
+	:   transportSource(transportSource_),
+		thread("audio file preview"),
+		scrollbar (false),
+		formatManager(),
         thumbnailCache (5),
         thumbnail (512, formatManager, thumbnailCache),
         isFollowingTransport (false)
@@ -31,6 +30,8 @@ WaveformComponent::WaveformComponent (AudioFormatManager& formatManager,
 
     currentPositionMarker.setFill (Colours::white.withAlpha (0.85f));
     addAndMakeVisible (currentPositionMarker);
+
+    formatManager.registerBasicFormats();
 }
 
 WaveformComponent::~WaveformComponent()
@@ -52,7 +53,10 @@ void WaveformComponent::setFile (const File& file)
     }
 }
 
-File WaveformComponent::getLastDroppedFile() const noexcept                    { return lastFileDropped; }
+File WaveformComponent::getLastDroppedFile() const noexcept
+{
+	return lastFileDropped;
+}
 
 void WaveformComponent::setZoomFactor (double amount)
 {
@@ -77,7 +81,7 @@ void WaveformComponent::setFollowsTransport (bool shouldFollow)
     isFollowingTransport = shouldFollow;
 }
 
-void WaveformComponent::paint (Graphics& g) override
+void WaveformComponent::paint (Graphics& g)
 {
     g.fillAll (Colours::darkgrey);
     g.setColour (Colours::lightblue);
@@ -96,45 +100,67 @@ void WaveformComponent::paint (Graphics& g) override
     }
 }
 
-void WaveformComponent::resized() override
+void WaveformComponent::resized()
 {
     scrollbar.setBounds (getLocalBounds().removeFromBottom (14).reduced (2));
 }
 
-void WaveformComponent::changeListenerCallback (ChangeBroadcaster*) override
+void WaveformComponent::changeListenerCallback (ChangeBroadcaster*)
 {
     // this method is called by the thumbnail when it has changed, so we should repaint it..
     repaint();
 }
 
-bool WaveformComponent::isInterestedInFileDrag (const StringArray& /*files*/) override
+bool WaveformComponent::isInterestedInFileDrag (const StringArray& /*files*/)
 {
     return true;
 }
 
-void WaveformComponent::filesDropped (const StringArray& files, int /*x*/, int /*y*/) override
+void WaveformComponent::filesDropped (const StringArray& files, int /*x*/, int /*y*/)
 {
     lastFileDropped = File (files[0]);
-    sendChangeMessage();
+	const File& audioFile = lastFileDropped;
+
+    // unload the previous file source and delete it..
+    transportSource.stop();
+    transportSource.setSource (nullptr);
+    currentAudioFileSource = nullptr;
+
+    AudioFormatReader* reader = formatManager.createReaderFor (audioFile);
+
+    if (reader != nullptr)
+    {
+        currentAudioFileSource = new AudioFormatReaderSource (reader, true);
+
+        // ..and plug it into our transport source
+        transportSource.setSource (currentAudioFileSource,
+                                    32768,                   // tells it to buffer this many samples ahead
+                                    &thread,                 // this is the background thread to use for reading-ahead
+                                    reader->sampleRate);     // allows for sample rate correction
+    }
+
+    //zoomSlider.setValue (0, dontSendNotification);
+	const File& file = audioFile;
+    setFile (file);
 }
 
-void WaveformComponent::mouseDown (const MouseEvent& e) override
+void WaveformComponent::mouseDown (const MouseEvent& e)
 {
     mouseDrag (e);
 }
 
-void WaveformComponent::mouseDrag (const MouseEvent& e) override
+void WaveformComponent::mouseDrag (const MouseEvent& e)
 {
     if (canMoveTransport())
         transportSource.setPosition (jmax (0.0, xToTime ((float) e.x)));
 }
 
-void WaveformComponent::mouseUp (const MouseEvent&) override
+void WaveformComponent::mouseUp (const MouseEvent&)
 {
     transportSource.start();
 }
 
-void WaveformComponent::mouseWheelMove (const MouseEvent&, const MouseWheelDetails& wheel) override
+void WaveformComponent::mouseWheelMove (const MouseEvent&, const MouseWheelDetails& wheel)
 {
     if (thumbnail.getTotalLength() > 0.0)
     {
@@ -144,8 +170,10 @@ void WaveformComponent::mouseWheelMove (const MouseEvent&, const MouseWheelDetai
         if (canMoveTransport())
             setRange (Range<double> (newStart, newStart + visibleRange.getLength()));
 
+		/*
         if (wheel.deltaY != 0.0f)
             zoomSlider.setValue (zoomSlider.getValue() - wheel.deltaY);
+		*/
 
         repaint();
     }
@@ -166,14 +194,14 @@ bool WaveformComponent::canMoveTransport() const noexcept
     return ! (isFollowingTransport && transportSource.isPlaying());
 }
 
-void WaveformComponent::scrollBarMoved (ScrollBar* scrollBarThatHasMoved, double newRangeStart) override
+void WaveformComponent::scrollBarMoved (ScrollBar* scrollBarThatHasMoved, double newRangeStart)
 {
     if (scrollBarThatHasMoved == &scrollbar)
         if (! (isFollowingTransport && transportSource.isPlaying()))
             setRange (visibleRange.movedToStartAt (newRangeStart));
 }
 
-void WaveformComponent::timerCallback() override
+void WaveformComponent::timerCallback()
 {
     if (canMoveTransport())
         updateCursorPosition();

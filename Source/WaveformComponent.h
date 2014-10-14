@@ -24,9 +24,7 @@ class WaveformComponent    : public Component,
 							private Timer
 {
 public:
-    WaveformComponent(AudioFormatManager& formatManager,
-                       AudioTransportSource& transportSource_,
-                       Slider& slider);
+    WaveformComponent(AudioTransportSource& transportSource_);
     ~WaveformComponent();
 
 	void setFile (const File& file);
@@ -47,8 +45,12 @@ public:
 
 
 private:
+    AudioFormatManager formatManager;
+    ScopedPointer<AudioFormatReaderSource> currentAudioFileSource;
+    AudioSourcePlayer audioSourcePlayer;
     AudioTransportSource& transportSource;
-    Slider& zoomSlider;
+    TimeSliceThread thread;
+    //Slider& zoomSlider;
     ScrollBar scrollbar;
 
     AudioThumbnailCache thumbnailCache;

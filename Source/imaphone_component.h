@@ -65,6 +65,9 @@ private:
 	std::vector<ToggleButton*>* color_radios;
 
 	void color_radios_clear(ToggleButton* exclude);
+
+	AudioTransportSource transportSource;
+	ScopedPointer<WaveformComponent> waveform;
     //[/UserVariables]
 
     //==============================================================================
@@ -72,7 +75,6 @@ private:
     ScopedPointer<GroupComponent> groupComponent;
     ScopedPointer<GroupComponent> groupComponent2;
     ScopedPointer<image_component> image;
-    ScopedPointer<WaveformComponent> waveform;
     ScopedPointer<ComboBox> comboBox;
     ScopedPointer<Label> label2;
     ScopedPointer<ToggleButton> color_radio_red;
