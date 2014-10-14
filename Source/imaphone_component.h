@@ -23,8 +23,9 @@
 //[Headers]     -- You can add your own extra header files here --
 #include "JuceHeader.h"
 
+#include "WaveformComponent.h"
+
 #include "image_component.h"
-#include "waveform_component.h"
 //[/Headers]
 
 
@@ -71,7 +72,7 @@ private:
     ScopedPointer<GroupComponent> groupComponent;
     ScopedPointer<GroupComponent> groupComponent2;
     ScopedPointer<image_component> image;
-    ScopedPointer<waveform_component> waveform;
+    ScopedPointer<WaveformComponent> waveform;
     ScopedPointer<ComboBox> comboBox;
     ScopedPointer<Label> label2;
     ScopedPointer<ToggleButton> color_radio_red;

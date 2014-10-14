@@ -24,6 +24,7 @@
 #include "JuceHeader.h"
 
 #include <ctime>
+#include <math.h>
 
 #include "auxilliary/logger.h"
 #include "auxilliary/juce_file_io.h"
@@ -71,10 +72,15 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-	aux::logger* logger;
-	aux::logger_params* logger_params;
+	// state for waveform drawing
+	// 0.5 = 0.5 pixel per sample (2 samples per pixel) 
+	// 1.0 = 1.0 pixel per sample
+	// 2.0 = 2.0 pixel per sample
+	unsigned long sample_start;
+	double scale;
 
 	CriticalSection audio_data_lock;
+	unsigned long audio_data_length;
 	float* audio_data;
     //[/UserVariables]
 

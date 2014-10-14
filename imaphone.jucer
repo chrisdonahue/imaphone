@@ -25,19 +25,19 @@
           <FILE id="UQT1Jx" name="kissfft.hh" compile="0" resource="0" file="Source/dependencies/kiss_fft130/kissfft.hh"/>
         </GROUP>
       </GROUP>
-      <FILE id="LsMq2S" name="image_component.cpp" compile="1" resource="0"
-            file="Source/image_component.cpp"/>
-      <FILE id="EvBLCD" name="image_component.h" compile="0" resource="0"
-            file="Source/image_component.h"/>
-      <FILE id="JWbBV1" name="waveform_component.cpp" compile="1" resource="0"
-            file="Source/waveform_component.cpp"/>
-      <FILE id="sgqS1O" name="waveform_component.h" compile="0" resource="0"
-            file="Source/waveform_component.h"/>
+      <FILE id="s9kFjl" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
       <FILE id="agWOQc" name="imaphone_component.cpp" compile="1" resource="0"
             file="Source/imaphone_component.cpp"/>
       <FILE id="SndOcJ" name="imaphone_component.h" compile="0" resource="0"
             file="Source/imaphone_component.h"/>
-      <FILE id="s9kFjl" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="LsMq2S" name="image_component.cpp" compile="1" resource="0"
+            file="Source/image_component.cpp"/>
+      <FILE id="EvBLCD" name="image_component.h" compile="0" resource="0"
+            file="Source/image_component.h"/>
+      <FILE id="ROW2DN" name="WaveformComponent.cpp" compile="1" resource="0"
+            file="Source/WaveformComponent.cpp"/>
+      <FILE id="faJN25" name="WaveformComponent.h" compile="0" resource="0"
+            file="Source/WaveformComponent.h"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
@@ -62,6 +62,7 @@
         <MODULEPATH id="juce_audio_formats" path="../JUCE/modules"/>
         <MODULEPATH id="juce_audio_devices" path="../JUCE/modules"/>
         <MODULEPATH id="juce_audio_basics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../JUCE/modules"/>
       </MODULEPATHS>
     </VS2012>
   </EXPORTFORMATS>
@@ -70,6 +71,7 @@
     <MODULES id="juce_audio_devices" showAllCode="1" useLocalCopy="1"/>
     <MODULES id="juce_audio_formats" showAllCode="1" useLocalCopy="1"/>
     <MODULES id="juce_audio_processors" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_audio_utils" showAllCode="1" useLocalCopy="1"/>
     <MODULES id="juce_core" showAllCode="1" useLocalCopy="1"/>
     <MODULES id="juce_cryptography" showAllCode="1" useLocalCopy="1"/>
     <MODULES id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>

@@ -37,42 +37,8 @@ waveform_component::waveform_component ()
 
 
     //[Constructor] You can add your own custom stuff here..
-	// initialize logger
-	logger_params = (aux::logger_params*) malloc(sizeof(aux::logger_params));
-	logger_params->log_params = (aux::log_params*) malloc(sizeof(aux::log_params));
-	logger_params->verbose_params = (aux::log_params*) malloc(sizeof(aux::log_params));
-	logger_params->debug_params = (aux::log_params*) malloc(sizeof(aux::log_params));
-	logger_params->error_params = (aux::log_params*) malloc(sizeof(aux::log_params));
-
-	logger_params->log_params->to_file = true;
-	logger_params->log_params->to_cout = false;
-	logger_params->log_params->to_cerr = false;
-	logger_params->verbose_params->to_file = true;
-	logger_params->verbose_params->to_cout = false;
-	logger_params->verbose_params->to_cerr = false;
-	logger_params->debug_params->to_file = true;
-	logger_params->debug_params->to_cout = false;
-	logger_params->debug_params->to_cerr = false;
-	logger_params->error_params->to_file = true;
-	logger_params->error_params->to_cout = false;
-	logger_params->error_params->to_cerr = false;
-
-	logger_params->log_precision = 4;
-	logger_params->verbose_to_log = true;
-
-	time_t rawtime;
-	struct tm * timeinfo;
-	char time_string[80];
-
-	time (&rawtime);
-	timeinfo = localtime(&rawtime);
-
-	strftime(time_string, 80, "%Y.%m.%d.%I.%M.%S", timeinfo);
-	std::string str(time_string);
-
-	logger = new aux::logger(logger_params, time_string, "C:\\Code\\autosample\\debug\\");
-
-	// init audio buffer
+	sample_start = 0;
+	scale = 1.0;
 	audio_data = nullptr;
     //[/Constructor]
 }
@@ -85,17 +51,7 @@ waveform_component::~waveform_component()
 
 
     //[Destructor]. You can add your own custom destruction code here..
-
-	// delete logger
-	free(logger_params->log_params);
-    free(logger_params->verbose_params);
-    free(logger_params->debug_params);
-    free(logger_params->error_params);
-    free(logger_params);
-	delete logger;
-
 	free(audio_data);
-
     //[/Destructor]
 }
 
@@ -115,14 +71,36 @@ void waveform_component::paint (Graphics& g)
 	g.setColour(Colours::blue);
 	int width = this->getWidth();
 	int height = this->getHeight();
+
+	unsigned 
+
+	// multiple samples per pixel
+	if (scale < 1.0) {
+		int samples_per_pixel = (int) (1.0 / scale);
+		for (int x = 0; x < this->getWidth(); x+= samples_per_pixel) {
+			float average = 0.0;
+			for (int s = 0; s < samples_per_pixel; s++) {
+				average += audio_data[x + s];
+			}
+			average = average / ((float) samples_per_pixel);
+			int y = (120 * average) + 120;
+			int y_prime = (120 * audio_data[x + 1]) + 120;
+			g.drawLine((float) x, (float) y, (float) x + 1, (float) y_prime);
+		}
+	}
+	// 1 sample per pixel
+	else if (scale == 1.0) {
+	}
+	// multiple pixels per sample
+	else {
+	}
+
+
 	for (int x = 0; x < this->getWidth() - 1; x++) {
-		float frame = audio_data[x];
-		int y = (120 * frame) + 120;
-		int y_prime = (120 * audio_data[x + 1]) + 120;
-		g.drawLine((float) x, (float) y, (float) x + 1, (float) y_prime);
+
 	}
 	g.setColour(Colours::red);
-	g.drawLine(0.0f, 120.0f, 490.0f, 120.0f);
+	g.drawLine(0.0f, 120.0f, 490.0f, (float) x);
     //[/UserPaint]
 }
 
@@ -137,15 +115,14 @@ void waveform_component::filesDropped (const StringArray& filenames, int mouseX,
     //[UserCode_filesDropped] -- Add your code here...
 	const ScopedLock sl (audio_data_lock);
 	String filename = filenames[0];
-	unsigned long num_frames;
 	unsigned bits_per_sample;
 	double length_seconds;
 	double sampling_frequency;
 	double nyquist_frequency;
-	aux::juce_file_io::get_wav_file_metadata(filename.toStdString(), &num_frames, &bits_per_sample, &length_seconds, &sampling_frequency, &nyquist_frequency);
+	aux::juce_file_io::get_wav_file_metadata(filename.toStdString(), &audio_data_length, &bits_per_sample, &length_seconds, &sampling_frequency, &nyquist_frequency);
 	free(audio_data);
-	audio_data = (float*) malloc(sizeof(float) * num_frames);
-	aux::juce_file_io::load_wav_file(filename.toStdString(), 256, num_frames, audio_data);
+	audio_data = (float*) malloc(sizeof(float) * audio_data_length);
+	aux::juce_file_io::load_wav_file(filename.toStdString(), 256, audio_data_length, audio_data);
 	this->repaint();
     //[/UserCode_filesDropped]
 }

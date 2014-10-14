@@ -47,7 +47,7 @@ imaphone_component::imaphone_component ()
     addAndMakeVisible (image = new image_component());
     image->setName ("new component");
 
-    addAndMakeVisible (waveform = new waveform_component());
+    addAndMakeVisible (waveform = new WaveformComponent());
     waveform->setName ("new component");
 
     addAndMakeVisible (comboBox = new ComboBox ("new combo box"));
@@ -314,7 +314,7 @@ BEGIN_JUCER_METADATA
                     virtualName="" explicitFocusOrder="0" pos="16 48 248 248" class="image_component"
                     params=""/>
   <GENERICCOMPONENT name="new component" id="488d7df3e5aa6c5" memberName="waveform"
-                    virtualName="" explicitFocusOrder="0" pos="336 48 248 248" class="waveform_component"
+                    virtualName="" explicitFocusOrder="0" pos="336 48 248 248" class="WaveformComponent"
                     params=""/>
   <COMBOBOX name="new combo box" id="43e8bee5de81e80" memberName="comboBox"
             virtualName="" explicitFocusOrder="0" pos="112 304 150 24" editable="0"
